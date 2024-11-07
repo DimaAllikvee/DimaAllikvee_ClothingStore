@@ -1,10 +1,10 @@
-package org.example.interfaces.impl;
+package org.example.apphelpers;
 
 import org.example.interfaces.ClothingProvider;
 import org.example.interfaces.Input;
 import org.example.model.Clothes;
 
-public class AppHelperClothing implements ClothingProvider {
+public class ClothingAppHelper implements ClothingProvider {
 
     @Override
     public Clothes create(Input input) {

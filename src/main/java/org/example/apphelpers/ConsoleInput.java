@@ -1,4 +1,4 @@
-package org.example.interfaces.impl;
+package org.example.apphelpers;
 
 import org.example.interfaces.Input;
 

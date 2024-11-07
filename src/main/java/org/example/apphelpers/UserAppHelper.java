@@ -1,10 +1,10 @@
-package org.example.interfaces.impl;
+package org.example.apphelpers;
 
 import org.example.interfaces.Input;
 import org.example.interfaces.UserProvider;
 import org.example.model.User;
 
-public class AppHelperUsers implements UserProvider {
+public class UserAppHelper implements UserProvider {
 
     @Override
     public User create(Input input) {
