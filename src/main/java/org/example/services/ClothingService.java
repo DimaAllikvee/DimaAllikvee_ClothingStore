@@ -86,7 +86,7 @@ public class ClothingService implements Service<Clothes> {
             return false;
         }
 
-        System.out.println("----- Список одежды -----");
+
         return clothingAppHelper.printList(clothesList);
     }
 

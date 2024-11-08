@@ -44,7 +44,7 @@ public class ClothingAppHelper implements AppHelper<Clothes>, Input {
             return false;
         }
 
-        System.out.println("----- Список одежды -----");
+
         for (int i = 0; i < clothesList.size(); i++) {
             Clothes clothes = clothesList.get(i);
             System.out.printf("%d. Название: %s, Тип: %s, Размер: %s, Цвет: %s, Цена: $%.2f%n",

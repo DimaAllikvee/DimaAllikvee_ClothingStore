@@ -29,7 +29,6 @@ public class OrderAppHelper implements AppHelper<Order>, Input {
     @Override
     public Order create() {
         try {
-            System.out.println("----- Оформление заказа -----");
 
             // Показать список доступной одежды и выбрать одежду
             clothingService.print();
@@ -37,13 +36,13 @@ public class OrderAppHelper implements AppHelper<Order>, Input {
             int clothingIndex = Integer.parseInt(getString()) - 1;
             Clothes selectedClothes = clothingService.list().get(clothingIndex);
 
-            // Показать список клиентов и выбрать клиента
+
             customerService.print();
             System.out.print("Выберите номер клиента: ");
             int customerIndex = Integer.parseInt(getString()) - 1;
             Customer selectedCustomer = customerService.list().get(customerIndex);
 
-            // Создаем новый заказ, используя конструктор с параметрами
+
             Order order = new Order(selectedClothes, selectedCustomer, LocalDate.now());
 
             System.out.println("Заказ успешно создан.");
@@ -60,7 +59,6 @@ public class OrderAppHelper implements AppHelper<Order>, Input {
      */
     @Override
     public boolean printList(List<Order> orders) {
-        System.out.println("----- Список заказов -----");
         if (orders.isEmpty()) {
             System.out.println("Заказы отсутствуют.");
             return false;
@@ -70,7 +68,7 @@ public class OrderAppHelper implements AppHelper<Order>, Input {
             Order order = orders.get(i);
             System.out.printf("%d. Клиент: %s %s, Одежда: %s, Тип: %s, Размер: %s, Цвет: %s, Дата заказа: %s%n",
                     i + 1,
-
+                    order.getCustomer().getFirstName(), order.getCustomer().getLastName(),
                     order.getClothes().getName(),
                     order.getClothes().getType(),
                     order.getClothes().getSize(),

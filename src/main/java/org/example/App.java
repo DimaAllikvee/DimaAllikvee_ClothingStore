@@ -91,9 +91,9 @@ public class App implements Input {
                     break;
                 case 7:
                     System.out.println("----- Редактирование клиента -----");
-                    System.out.print("Введите фамилию клиента для редактирования: ");
-                    String customerLastName = getString();
                     System.out.print("Введите имя клиента для редактирования: ");
+                    String customerLastName = getString();
+                    System.out.print("Введите фамилию клиента для редактирования: ");
                     String customerFirstName = getString();
                     Customer customerToEdit = new Customer(customerFirstName, customerLastName);
                     if (customerService.edit(customerToEdit)) {
@@ -104,9 +104,9 @@ public class App implements Input {
                     break;
                 case 8:
                     System.out.println("----- Удаление клиента -----");
-                    System.out.print("Введите фамилию клиента для удаления: ");
-                    String customerLastNameToDelete = getString();
                     System.out.print("Введите имя клиента для удаления: ");
+                    String customerLastNameToDelete = getString();
+                    System.out.print("Введите фамилию клиента для удаления: ");
                     String customerFirstNameToDelete = getString();
                     Customer customerToDelete = new Customer(customerFirstNameToDelete, customerLastNameToDelete);
                     if (customerService.remove(customerToDelete)) {

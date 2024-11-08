@@ -62,7 +62,7 @@ public class Clothes implements Serializable {
         this.price = price;
     }
 
-    // Метод toString() для удобного отображения информации об одежде
+
     @Override
     public String toString() {
         return String.format("Название: %s, Тип: %s, Размер: %s, Цвет: %s, Цена: $%.2f",

@@ -11,9 +11,9 @@ public class CustomerAppHelper implements AppHelper<Customer>, Input {
 
     @Override
     public Customer create() {
-        System.out.print("Фамилия клиента: ");
-        String firstName = getString();
         System.out.print("Имя клиента: ");
+        String firstName = getString();
+        System.out.print("Фамилия клиента: ");
         String lastName = getString();
 
         return new Customer(firstName, lastName);
