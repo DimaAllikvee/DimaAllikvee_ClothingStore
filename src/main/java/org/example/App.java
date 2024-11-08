@@ -1,89 +1,137 @@
 package org.example;
 
+
 import org.example.interfaces.Input;
+import org.example.interfaces.Service;
 import org.example.model.Clothes;
-import org.example.model.User;
-import org.example.services.ClothingService;
-import org.example.services.UserService;
+import org.example.model.Customer;
+import org.example.model.Order;
 
-public class App {
-    public Clothes[] clothes;
-    public User[] users;
+public class App implements Input {
 
-    private final ClothingService clothingService;
-    private final UserService userService;
-    private final Input input;
+    private final Service<Clothes> clothingService;
+    private final Service<Customer> customerService;
+    private final Service<Order> orderService;
 
-    public App(Input input, ClothingService clothingService, UserService userService) {
-        this.users = new User[100];
-        this.clothes = new Clothes[100];
+    public App(Service<Clothes> clothingService, Service<Customer> customerService, Service<Order> orderService) {
         this.clothingService = clothingService;
-        this.input = input;
-        this.userService = userService;
+        this.customerService = customerService;
+        this.orderService = orderService;
     }
 
     public void run() {
         System.out.println("------ Магазин одежды ------");
-        System.out.println("--------------------------------------");
-        boolean repeat=true;
+        System.out.println("----------------------------");
+        boolean repeat = true;
         do {
             System.out.println("Список задач: ");
             System.out.println("0. Выйти из программы");
             System.out.println("1. Добавить одежду");
             System.out.println("2. Список одежды");
-            System.out.println("3. Добавить покупателя");
-            System.out.println("4. Список покупателей");
+            System.out.println("3. Редактировать одежду");
+            System.out.println("4. Удалить одежду");
+            System.out.println("5. Добавить клиента");
+            System.out.println("6. Список клиентов");
+            System.out.println("7. Редактировать клиента");
+            System.out.println("8. Удалить клиента");
+            System.out.println("9. Оформить заказ");
+            System.out.println("10. Список заказов");
+
             System.out.print("Введите номер задачи: ");
-            int task = Integer.parseInt(input.getString());
+            int task = Integer.parseInt(getString());
             switch (task) {
                 case 0:
-                    repeat=false;
+                    repeat = false;
                     break;
                 case 1:
                     System.out.println("----- Добавление одежды -----");
-                    if(clothingService.add(input, clothes)){
+                    if (clothingService.add()) {
                         System.out.println("Одежда добавлена");
-                    }else{
-                        System.out.println("Одежду добавить не удолось");
+                    } else {
+                        System.out.println("Одежду добавить не удалось");
                     }
                     break;
                 case 2:
                     System.out.println("----- Список одежды -----");
-                    System.out.println(clothingService.printList(clothes));
+                    clothingService.print();
                     break;
                 case 3:
-                    System.out.println("----- Добавление покупателя -----");
-                    if(userService.add(input, users)){
-                        System.out.println("Покупатель добавлен");
-                    }else{
-                        System.out.println("Покупателя добавить не удалось");
+                    System.out.println("----- Редактирование одежды -----");
+                    System.out.print("Введите название одежды для редактирования: ");
+                    String clothingName = getString();
+                    Clothes clothesToEdit = new Clothes(clothingName, "", "", "",0.0);
+                    if (clothingService.edit(clothesToEdit)) {
+                        System.out.println("Одежда успешно отредактирована");
+                    } else {
+                        System.out.println("Одежда не найдена");
                     }
                     break;
                 case 4:
-                    System.out.println("----- Список покупателей -----");
-                    System.out.println(userService.printList(users));
+                    System.out.println("----- Удаление одежды -----");
+                    System.out.print("Введите название одежды для удаления: ");
+                    String clothingNameToDelete = getString();
+                    Clothes clothesToDelete = new Clothes(clothingNameToDelete, "", "", "",0.0);
+                    if (clothingService.remove(clothesToDelete)) {
+                        System.out.println("Одежда успешно удалена");
+                    } else {
+                        System.out.println("Одежда не найдена");
+                    }
+                    break;
+                case 5:
+                    System.out.println("----- Добавление клиента -----");
+                    if (customerService.add()) {
+                        System.out.println("Клиент добавлен");
+                    } else {
+                        System.out.println("Клиента добавить не удалось");
+                    }
+                    break;
+                case 6:
+                    System.out.println("----- Список клиентов -----");
+                    customerService.print();
+                    break;
+                case 7:
+                    System.out.println("----- Редактирование клиента -----");
+                    System.out.print("Введите фамилию клиента для редактирования: ");
+                    String customerLastName = getString();
+                    System.out.print("Введите имя клиента для редактирования: ");
+                    String customerFirstName = getString();
+                    Customer customerToEdit = new Customer(customerFirstName, customerLastName);
+                    if (customerService.edit(customerToEdit)) {
+                        System.out.println("Клиент успешно отредактирован");
+                    } else {
+                        System.out.println("Клиент не найден");
+                    }
+                    break;
+                case 8:
+                    System.out.println("----- Удаление клиента -----");
+                    System.out.print("Введите фамилию клиента для удаления: ");
+                    String customerLastNameToDelete = getString();
+                    System.out.print("Введите имя клиента для удаления: ");
+                    String customerFirstNameToDelete = getString();
+                    Customer customerToDelete = new Customer(customerFirstNameToDelete, customerLastNameToDelete);
+                    if (customerService.remove(customerToDelete)) {
+                        System.out.println("Клиент успешно удален");
+                    } else {
+                        System.out.println("Клиент не найден");
+                    }
+                    break;
+                case 9:
+                    System.out.println("----- Оформление заказа -----");
+                    if (orderService.add()) {
+                        System.out.println("Заказ оформлен");
+                    } else {
+                        System.out.println("Не удалось оформить заказ");
+                    }
+                    break;
+                case 10:
+                    System.out.println("----- Список заказов -----");
+                    orderService.print();
                     break;
                 default:
-                    System.out.println("Выберите задачу из списка");
+                    System.out.println("Неверный номер задачи, попробуйте снова.");
             }
-            System.out.println("--------------------------------------");
+            System.out.println("----------------------------");
         } while (repeat);
         System.out.println("До свидания :)");
     }
-    public User[] getUsers() {
-        return users;
-    }
-
-    public void setUsers(User[] users) {
-        this.users = users;
-    }
-
-    public Clothes[] getClothes() {
-        return clothes;
-    }
-
-    public void setClothes(Clothes[] clothes) {
-        this.clothes = clothes;
-    }
-
 }

@@ -1,5 +1,10 @@
 package org.example.interfaces;
 
+import java.util.Scanner;
+
 public interface Input {
-    String getString();
+    default String getString() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
 }

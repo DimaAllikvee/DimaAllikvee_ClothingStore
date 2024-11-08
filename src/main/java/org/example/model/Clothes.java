@@ -1,35 +1,27 @@
 package org.example.model;
 
-import java.util.UUID;
-import java.util.Objects;
+import java.io.Serializable;
 
-public class Clothes {
-    private UUID id;
+public class Clothes implements Serializable {
     private String name;
     private String type;
     private String size;
     private String color;
+    private double price;
 
-    public Clothes() {
-        this.id = UUID.randomUUID();
-    }
+    // Конструктор без параметров
+    public Clothes() {}
 
-    public Clothes(String name, String type, String size, String color) {
-        this.id = UUID.randomUUID();
+    // Конструктор с пятью параметрами
+    public Clothes(String name, String type, String size, String color, double price) {
         this.name = name;
         this.type = type;
         this.size = size;
         this.color = color;
+        this.price = price;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
+    // Геттеры и сеттеры
     public String getName() {
         return name;
     }
@@ -62,31 +54,18 @@ public class Clothes {
         this.color = color;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Clothes clothes = (Clothes) o;
-        return id.equals(clothes.id) &&
-                name.equals(clothes.name) &&
-                type.equals(clothes.type) &&
-                size.equals(clothes.size) &&
-                color.equals(clothes.color);
+    public double getPrice() {
+        return price;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, type, size, color);
+    public void setPrice(double price) {
+        this.price = price;
     }
 
+    // Метод toString() для удобного отображения информации об одежде
     @Override
     public String toString() {
-        return "Clothes{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", size='" + size + '\'' +
-                ", color='" + color + '\'' +
-                '}';
+        return String.format("Название: %s, Тип: %s, Размер: %s, Цвет: %s, Цена: $%.2f",
+                name, type, size, color, price);
     }
 }
