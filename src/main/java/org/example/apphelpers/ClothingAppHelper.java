@@ -1,16 +1,14 @@
 package org.example.apphelpers;
 
-
 import org.example.interfaces.AppHelper;
 import org.example.interfaces.Input;
 import org.example.model.Clothes;
-
 import java.util.List;
 
 public class ClothingAppHelper implements AppHelper<Clothes>, Input {
 
     /**
-     * Метод для создания нового объекта одежды.
+     * Метод для создания одежды.
      */
     @Override
     public Clothes create() {

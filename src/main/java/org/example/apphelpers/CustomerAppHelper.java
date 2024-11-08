@@ -1,6 +1,5 @@
 package org.example.apphelpers;
 
-
 import org.example.interfaces.AppHelper;
 import org.example.interfaces.Input;
 import org.example.model.Customer;
@@ -8,6 +7,8 @@ import org.example.model.Customer;
 import java.util.List;
 
 public class CustomerAppHelper implements AppHelper<Customer>, Input {
+
+
 
     @Override
     public Customer create() {

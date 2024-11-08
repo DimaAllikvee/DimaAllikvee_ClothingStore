@@ -15,6 +15,10 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
 
+    public Order() {
+
+    }
+
 
     // Геттеры и сеттеры
     public void setClothes(Clothes clothes) {

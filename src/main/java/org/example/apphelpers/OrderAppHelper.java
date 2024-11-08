@@ -1,16 +1,14 @@
 package org.example.apphelpers;
 
-
-
 import org.example.interfaces.AppHelper;
 import org.example.interfaces.Input;
 import org.example.interfaces.Service;
 import org.example.model.Clothes;
 import org.example.model.Customer;
 import org.example.model.Order;
-
 import java.time.LocalDate;
 import java.util.List;
+
 
 public class OrderAppHelper implements AppHelper<Order>, Input {
 
@@ -30,7 +28,6 @@ public class OrderAppHelper implements AppHelper<Order>, Input {
     public Order create() {
         try {
 
-            // Показать список доступной одежды и выбрать одежду
             clothingService.print();
             System.out.print("Выберите номер одежды: ");
             int clothingIndex = Integer.parseInt(getString()) - 1;
@@ -41,7 +38,6 @@ public class OrderAppHelper implements AppHelper<Order>, Input {
             System.out.print("Выберите номер клиента: ");
             int customerIndex = Integer.parseInt(getString()) - 1;
             Customer selectedCustomer = customerService.list().get(customerIndex);
-
 
             Order order = new Order(selectedClothes, selectedCustomer, LocalDate.now());
 
